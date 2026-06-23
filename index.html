@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Узнай свое предсказание</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Контейнер для интерфейса кнопки и загрузки */
+        .interface-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Стильная минималистичная кнопка */
+        .magic-button {
+            padding: 16px 36px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #111111;
+            background-color: #ffffff;
+            border: 2px solid #eaeaea;
+            border-radius: 30px; /* Закругленные края */
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: -0.2px;
+        }
+
+        /* Эффект при наведении на обводку */
+        .magic-button:hover {
+            border-color: #999999;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .magic-button:active {
+            transform: translateY(0);
+            background-color: #fafafa;
+        }
+
+        /* Контейнер плавной загрузки */
+        .loader-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Эстетичный тонкий лоадер */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #111111;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-text {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Полноэкранное видео с Рикроллом */
+        .video-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            z-index: 9999;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="interface-container" id="mainInterface">
+        <button class="magic-button" id="startBtn" onclick="startLoading()">Получить предсказание</button>
+
+        <div class="loader-container" id="loaderBlock">
+            <div class="spinner"></div>
+            <div class="loader-text">Анализ данных...</div>
+        </div>
+    </div>
+
+    <div class="video-container" id="videoBlock">
+        <iframe id="rickrollVideo" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function startLoading() {
+            const startBtn = document.getElementById('startBtn');
+            const loaderBlock = document.getElementById('loaderBlock');
+            
+            // Скрываем кнопку и плавно показываем лоадер
+            startBtn.style.display = 'none';
+            loaderBlock.style.display = 'flex';
+
+            // Имитация красивой загрузки 3.5 секунды
+            setTimeout(() => {
+                const mainInterface = document.getElementById('mainInterface');
+                const videoBlock = document.getElementById('videoBlock');
+                const iframe = document.getElementById('rickrollVideo');
+
+                // Полностью скрываем белый интерфейс
+                mainInterface.style.display = 'none';
+                
+                // Включаем видео. Ссылка ведет на официальный клип с флагами autoplay (автозапуск)
+                iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&modestbranding=1";
+                
+                // Показываем блок с видео во весь экран
+                videoBlock.style.display = 'block';
+            }, 3500); 
+        }
+    </script>
+</body>
+</html>
