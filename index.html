@@ -21,7 +21,6 @@
             overflow: hidden;
         }
 
-        /* Контейнер для интерфейса кнопки и загрузки */
         .interface-container {
             display: flex;
             flex-direction: column;
@@ -30,7 +29,6 @@
             transition: opacity 0.5s ease;
         }
 
-        /* Стильная минималистичная кнопка */
         .magic-button {
             padding: 16px 36px;
             font-size: 16px;
@@ -38,7 +36,7 @@
             color: #111111;
             background-color: #ffffff;
             border: 2px solid #eaeaea;
-            border-radius: 30px; /* Закругленные края */
+            border-radius: 30px;
             cursor: pointer;
             outline: none;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
@@ -46,7 +44,6 @@
             letter-spacing: -0.2px;
         }
 
-        /* Эффект при наведении на обводку */
         .magic-button:hover {
             border-color: #999999;
             transform: translateY(-2px);
@@ -58,7 +55,6 @@
             background-color: #fafafa;
         }
 
-        /* Контейнер плавной загрузки */
         .loader-container {
             display: none;
             flex-direction: column;
@@ -66,7 +62,6 @@
             gap: 20px;
         }
 
-        /* Эстетичный тонкий лоадер */
         .spinner {
             width: 40px;
             height: 40px;
@@ -94,7 +89,6 @@
             50% { opacity: 1; }
         }
 
-        /* Полноэкранное видео с Рикроллом */
         .video-container {
             display: none;
             position: fixed;
@@ -133,23 +127,19 @@
             const startBtn = document.getElementById('startBtn');
             const loaderBlock = document.getElementById('loaderBlock');
             
-            // Скрываем кнопку и плавно показываем лоадер
             startBtn.style.display = 'none';
             loaderBlock.style.display = 'flex';
 
-            // Имитация красивой загрузки 3.5 секунды
             setTimeout(() => {
                 const mainInterface = document.getElementById('mainInterface');
                 const videoBlock = document.getElementById('videoBlock');
                 const iframe = document.getElementById('rickrollVideo');
 
-                // Полностью скрываем белый интерфейс
                 mainInterface.style.display = 'none';
                 
-                // Включаем видео. Ссылка ведет на официальный клип с флагами autoplay (автозапуск)
-                iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&modestbranding=1";
+                // Исправленная ссылка для мобильных (с обходом блокировки черного экрана)
+                iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=1&modestbranding=1";
                 
-                // Показываем блок с видео во весь экран
                 videoBlock.style.display = 'block';
             }, 3500); 
         }
